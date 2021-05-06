@@ -3,10 +3,11 @@ const fs = require('fs');
 const path = require('path');
 var router = express.Router();
 
+//Models
 const Group = require('../models/Group');
 const User = require('../models/User');
 
-/* List of available groups */
+// List of available groups
 router.get('/', function(req, res, next) {
   console.log(req.query);
   const filter = {};
@@ -19,12 +20,15 @@ router.get('/', function(req, res, next) {
   });
 });
 
+//New group creation
 router.post('/', function(req, res, next) {
 
   let data = JSON.parse(req.body.data);
   let file = req.body.avatarFile;
 
   let avatar = '';
+
+  //We need to save uploaded files
   if( file ) {
     const srcFileName = file.path.split('/').pop();
     const filePath = path.join(__dirname, `../public/images/groups/`,srcFileName);
@@ -37,8 +41,7 @@ router.post('/', function(req, res, next) {
 
   let group = new Group(data);
 
-  let insertRes = group.save( (err, newGroup) => {
-    let id = newGroup._id;
+  group.save( (err, newGroup) => {
 
     const userNewGroupData = {
       _id: newGroup._id,
@@ -69,7 +72,6 @@ router.get('/:code', function(req, res, next) {
   const filter = {
     code: req.params.code
   };
-  console.log(filter);
   Group.findOne(filter, (err,response) => {
     res.json(response);
   });

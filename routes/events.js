@@ -3,10 +3,11 @@ const fs = require('fs');
 const path = require('path');
 var router = express.Router();
 
+//Models
 const Event = require('../models/Event');
 const User = require('../models/User');
 
-/* List of available events */
+// List of available events
 router.get('/', function(req, res, next) {
   const filter = {};
   if(req.query.group) {

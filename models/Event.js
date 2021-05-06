@@ -16,7 +16,8 @@ const Event = mongoose.model('Event', new mongoose.Schema({
   description: 'String',
   createdBy: 'String',
   createdAt: 'Date',
-  participants: [{}]
+  participants: [{}],
+  posts: [{}]
 }));
 
 module.exports = Event;

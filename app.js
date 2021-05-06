@@ -8,8 +8,7 @@ var logger = require('morgan');
 require('dotenv').config();
 const formData = require("express-form-data");
 
-
-var indexRouter = require('./routes/index');
+/* routers */
 var usersRouter = require('./routes/users');
 var sportsRouter = require('./routes/sports');
 var groupsRouter = require('./routes/groups');
@@ -17,9 +16,10 @@ var usersRouter = require('./routes/users');
 var eventsRouter = require('./routes/events');
 
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_SERVER}/${process.env.DB_NAME}`;
-
 var app = express();
+
+//DB connection
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_SERVER}/${process.env.DB_NAME}`;
 
 mongoose.connect(uri,{ useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false },(err) => {
   if(err) {
@@ -27,7 +27,6 @@ mongoose.connect(uri,{ useUnifiedTopology: true, useNewUrlParser: true, useFindA
   }
 
   console.log('DB connected');
-
   // parse data with connect-multiparty. 
   app.use(formData.parse({
     uploadDir: os.tmpdir(),
@@ -47,10 +46,7 @@ mongoose.connect(uri,{ useUnifiedTopology: true, useNewUrlParser: true, useFindA
   app.use(cookieParser());
 
   app.use(express.static(path.join(__dirname, 'public')));
-
   
-  app.use('/', indexRouter);
-  app.use('/users', usersRouter);
   app.use('/api/sports', sportsRouter);
   app.use('/api/groups', groupsRouter);
   app.use('/api/users', usersRouter);

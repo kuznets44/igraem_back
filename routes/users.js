@@ -11,7 +11,6 @@ router.get('/', function(req, res, next) {
 });
 /* GET user data */
 router.get('/:code', function(req, res, next) {
-  console.log(req.params);
   const filter = {
     code: req.params.code
   };
