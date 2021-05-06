@@ -47,10 +47,10 @@ mongoose.connect(uri,{ useUnifiedTopology: true, useNewUrlParser: true, useFindA
 
   app.use(express.static(path.join(__dirname, 'public')));
   
-  app.use('/api/sports', sportsRouter);
-  app.use('/api/groups', groupsRouter);
-  app.use('/api/users', usersRouter);
-  app.use('/api/events', eventsRouter);
+  app.use('/data/api/sports', sportsRouter);
+  app.use('/data/api/groups', groupsRouter);
+  app.use('/data/api/users', usersRouter);
+  app.use('/data/api/events', eventsRouter);
 
 });
 
