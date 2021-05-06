@@ -5,7 +5,9 @@ const User = mongoose.model('User', new mongoose.Schema({
   name: 'string',
   lastName: 'string',
   secondName: 'string',
-  avatar: 'string'
+  avatar: 'string',
+  groups: [{}],
+  events: []
 }));
 
 module.exports = User;
